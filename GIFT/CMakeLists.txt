@@ -61,7 +61,7 @@ set(GIFT_HEADER_FILES
 )
 
 # Add files from within the project
-add_library(GIFT STATIC
+add_library(GIFT SHARED
     ${GIFT_SOURCE_FILES}
     ${GIFT_HEADER_FILES}
 )
