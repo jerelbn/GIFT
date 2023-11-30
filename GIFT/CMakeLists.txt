@@ -23,6 +23,7 @@ set(GIFT_SOURCE_FILES
     src/camera/camera.cpp
     src/camera/DoubleSphereCamera.cpp
     src/camera/EquidistantCamera.cpp
+    src/camera/CataCamera.cpp
     src/camera/PinholeCamera.cpp
     src/camera/StandardCamera.cpp
     src/PointFeatureTracker.cpp
@@ -42,6 +43,7 @@ set(GIFT_HEADER_FILES
     include/GIFT/camera/camera.h
     include/GIFT/camera/DoubleSphereCamera.h
     include/GIFT/camera/EquidistantCamera.h
+    include/GIFT/camera/CataCamera.h
     include/GIFT/camera/GICamera.h
     include/GIFT/camera/PinholeCamera.h
     include/GIFT/camera/StandardCamera.h

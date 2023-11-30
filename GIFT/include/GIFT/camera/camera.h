@@ -19,6 +19,7 @@
 
 #include "GIFT/camera/DoubleSphereCamera.h"
 #include "GIFT/camera/EquidistantCamera.h"
+#include "GIFT/camera/CataCamera.h"
 #include "GIFT/camera/GICamera.h"
 #include "GIFT/camera/PinholeCamera.h"
 #include "GIFT/camera/StandardCamera.h"
