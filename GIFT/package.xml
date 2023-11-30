@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>GIFT</name>
+  <version>2.0.0</version>
+  <description>General Invariant Feature Tracker</description>
+
+  <maintainer email="jerel.nielsen@hayden.ai">Jerel Nielsen</maintainer>
+
+  <license>TODO</license>
+
+  <author email="jerel.nielsen@hayden.ai">Jerel Nielsen</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+
+  <exec_depend>roscpp</exec_depend>
+
+  <export>
+  </export>
+</package>

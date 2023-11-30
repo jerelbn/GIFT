@@ -62,6 +62,17 @@ set(GIFT_HEADER_FILES
     include/GIFT/RANSAC.h
 )
 
+catkin_package(
+    CATKIN_DEPENDS roscpp
+)
+
+catkin_package(
+    INCLUDE_DIRS include ${GIFT_INCLUDE_DIRS}
+    LIBRARIES ${PROJECT_NAME}
+    CATKIN_DEPENDS roscpp
+    DEPENDS
+)
+
 # Add files from within the project
 add_library(GIFT SHARED
     ${GIFT_SOURCE_FILES}
