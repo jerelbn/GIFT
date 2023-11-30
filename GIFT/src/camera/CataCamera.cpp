@@ -123,41 +123,13 @@ void CataCamera::distortion(const Eigen::Vector2d& p_u, Eigen::Vector2d& d_u, Ei
 
 // TODO: fix and test this
 Eigen::Matrix<ftype, 2, 3> CataCamera::projectionJacobian(const Eigen::Vector3T& point) const {
-  double norm, inv_denom;
-  double dxdmx = 0;
-  double dydmx = 0;
-  double dxdmy = 0;
-  double dydmy = 0;
-
-  norm = point.norm();
-  inv_denom = 1.0 / (point(2) + m_xi * norm);
-
-  // Calculate jacobian
-  inv_denom = inv_denom * inv_denom / norm;
-  double dudx = inv_denom * (norm * point(2) + m_xi * (point(1) * point(1) + point(2) * point(2)));
-  double dvdx = -inv_denom * m_xi * point(0) * point(1);
-  double dudy = dvdx;
-  double dvdy = inv_denom * (norm * point(2) + m_xi * (point(0) * point(0) + point(2) * point(2)));
-  inv_denom = inv_denom * (-m_xi * point(2) - norm); // reuse variable
-  double dudz = point(0) * inv_denom;
-  double dvdz = point(1) * inv_denom;
-
-  // Make the product of the jacobians and add projection matrix jacobian
-  inv_denom = m_gamma1 * (dudx * dxdmx + dvdx * dxdmy); // reuse
-  dvdx = m_gamma2 * (dudx * dydmx + dvdx * dydmy);
-  dudx = inv_denom;
-
-  inv_denom = m_gamma1 * (dudy * dxdmx + dvdy * dxdmy); // reuse
-  dvdy = m_gamma2 * (dudy * dydmx + dvdy * dydmy);
-  dudy = inv_denom;
-
-  inv_denom = m_gamma1 * (dudz * dxdmx + dvdz * dxdmy); // reuse
-  dvdz = m_gamma2 * (dudz * dydmx + dvdz * dydmy);
-  dudz = inv_denom;
-
+  // Numerical jacobian
+  const ftype eps = 1e-5;
   Eigen::Matrix<ftype, 2, 3> J;
-  J << dudx, dudy, dudz,
-       dvdx, dvdy, dvdz;
-
+  for (int j = 0; j < 2; ++j) {
+    const Eigen::Vector2T pp = projectPointEigen(point + eps * Eigen::Matrix3T::Identity().col(j));
+    const Eigen::Vector2T pm = projectPointEigen(point - eps * Eigen::Matrix3T::Identity().col(j));
+    J.col(j) = (pp - pm) / (2.0 * eps);
+  }
   return J;
 }
